@@ -5,7 +5,8 @@ class Article extends CI_Model{
     }
 
     public function article_list($table,$limit,$offset){
-        $data = $this->db->get($table,$limit,$offset)->result();
+        $user_id = $this->session->userdata('id');
+        $data = $this->db->where('user_id',$user_id)->get($table,$limit,$offset)->result();
         return $data;
     }
 
@@ -37,8 +38,19 @@ class Article extends CI_Model{
     }
 
     public function num_rows($table){
-        $result = $this->db->get($table)->num_rows();
+        $user_id = $this->session->userdata('id');
+        $result = $this->db->where('id',$user_id)->get($table)->num_rows();
         return $result;
+    }
+
+    public function all_article_list($table,$limit,$offset){
+        $query = $this->db->get($table,$limit,$offset)->result();
+        return $query;
+    }
+
+    public function all_num_rows($table){
+        $query = $this->db->get($table)->num_rows();
+        return $query;
     }
 }
 

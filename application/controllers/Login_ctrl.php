@@ -14,8 +14,10 @@ class Login_ctrl extends MY_Controller{
             // $this->form_validation->set_rules('email','Email','required|valid_email|trim');
             // $this->form_validation->set_rules('password','Password','required|trim');
             if($this->form_validation->run('login_rules')){
+                
                 $email = $this->input->post('email');
                 $password = md5($this->input->post('password'));
+                
                 $result = $this->login->login($email,$password);
                 
                 if($result == 'pass_error'){

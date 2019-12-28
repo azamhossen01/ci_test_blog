@@ -5,13 +5,15 @@ class Login extends CI_Model{
     }
 
     public function login($email,$password){
-        $email = $this->db->where('email',$email)->get('users')->row();
         
-        if($email){
+        $row = $this->db->where('email',$email)->get('users')->row();
+        
+        if($row){
             
-            $pass = $this->db->where('password',$password)->get('users')->row();
-                
+            $pass = $this->db->where('password',$password)->where('email',$email)->get('users')->row();
+               
             if($pass){
+                
                 $session_data = array(
                     'id' => $pass->id,
                     'username' => $pass->username,

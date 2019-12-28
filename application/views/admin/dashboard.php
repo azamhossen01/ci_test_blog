@@ -17,9 +17,10 @@
   </thead>
   <tbody>
     <?php if($data) : ?>
+    <?php $count = $this->uri->segment(3,0) ?>
     <?php foreach($data as $key=>$row) : ?>
     <tr class="table-active">
-      <th scope="row"><?= $key+1; ?></th>
+      <th scope="row"><?= ++$count; ?></th>
       <td><?php $a = $this->article->anyName('users','id',$row->user_id,'name'); echo $a->name; ?></td>
       <td><?= $row->title; ?></td>
       <td><?= $row->body; ?></td>
